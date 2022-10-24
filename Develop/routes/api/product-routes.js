@@ -55,20 +55,6 @@ router.post('/', async (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-    try {
-      const catagoriesData = await Product.create({
-        product_name: req.body.product_name,
-        price: req.body.price,
-        stock: req.body.stock,
-        tagIds: req.body.tagIds,
-      });
-      // 200 status code means the request is successful
-      res.status(200).json(catagoriesData);
-      return catagoriesData.bulkCreate(Product)
-    } catch (err) {
-      // 400 status code means the server could not understand the request
-      res.status(400).json(err);
-    }
   
   Product.create(req.body)
     .then((product) => {
