@@ -6,25 +6,27 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
-  const catagoriesData = await Product.findAll({
-    include: {
-      model: Product,
-      attributes: ['product_name'],
-    },
-    return: res.status(200).json(catagoriesData),
-  }).catch((err) => {
+  try {
+    const catagoriesData = await Category.findAll({
+      include: {
+        model: Product,
+        attributes: ['product_name'],
+      },
+    })
+    res.status(200).json(catagoriesData);
+  } catch (err) {
     if (!catagoriesData) {
       res.status(404).json({ message: 'No product with this id!' });
       return;
     }
-  })
+  }
 })
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-    const catagoriesData = await Product.findByPk(req.params.id);
+    const catagoriesData = await Category.findByPk(req.params.id);
     if (!catagoriesData) {
       res.status(404).json({ message: 'No product with this id!' });
       return;
@@ -36,10 +38,10 @@ router.get('/', async (req, res) => {
 });
 
 
-router.post('/:id', async (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category
   try {
-    const catagoriesData = await Product.create(req.body);
+    const catagoriesData = await Category.create(req.body);
     // 200 status code means the request is successful
     res.status(200).json(catagoriesData);
   } catch (err) {
