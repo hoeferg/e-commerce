@@ -7,10 +7,21 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
-  const userData = await User.findAll().catch((err) => {
+  const catagoriesData = await Product.findAll({
+    include: [
+      {
+      model: Category,
+      attributes: ['category_name'],
+      },
+      {
+      model: Tag,
+      attributes: ['tag_name'],
+    }
+  ]
+  }).catch((err) => {
     res.json(err);
   });
-  res.json(userData);
+  res.json(catagoriesData);
 
 });
 
@@ -19,12 +30,12 @@ router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
-    const userData = await User.findByPk(req.params.id);
-    if (!userData) {
+    const catagoriesData = await Product.findByPk(req.params.id);
+    if (!catagoriesData) {
       res.status(404).json({ message: 'No user with this id!' });
       return;
     }
-    res.status(200).json(userData);
+    res.status(200).json(catagoriesData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -42,9 +53,15 @@ router.post('/', async (req, res) => {
     }
   */
     try {
-      const userData = await User.create(req.body);
+      const catagoriesData = await Product.create({
+        product_name: req.body.product_name,
+        price: req.body.price,
+        stock: req.body.stock,
+        tagIds: req.body.tagIds,
+      });
       // 200 status code means the request is successful
-      res.status(200).json(userData);
+      res.status(200).json(catagoriesData);
+      return catagoriesData.bulkCreate(Product)
     } catch (err) {
       // 400 status code means the server could not understand the request
       res.status(400).json(err);
