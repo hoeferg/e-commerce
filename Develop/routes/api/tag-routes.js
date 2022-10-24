@@ -6,10 +6,15 @@ const { Tag, Product, ProductTag } = require('../../models');
 router.get('/', async (req, res) => {
   // find all tags
   // be sure to include its associated Product data
-  const userData = await User.findAll().catch((err) => {
+  const catagoriesData = await Product.findAll({
+    include: {
+      model: Product,
+      attributes: ['product_name', 'price', 'stock', 'category_id'],
+    }
+  }).catch((err) => {
     res.json(err);
   });
-  res.json(userData);
+  res.json(catagoriesData);
 
 });
 
@@ -17,12 +22,18 @@ router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
   try {
-    const userData = await User.findByPk(req.params.id);
-    if (!userData) {
-      res.status(404).json({ message: 'No user with this id!' });
+    const catagoriesData = await Product.findByPk({
+      req.params.id;
+      include: {
+        model: Product,
+        attributes: ['product_name', 'price', 'stock', 'category_id'],
+      }
+    });
+    if (!catagoriesData) {
+      res.status(404).json({ message: 'No Product with this id!' });
       return;
     }
-    res.status(200).json(userData);
+    res.status(200).json(catagoriesData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -31,9 +42,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   // create a new tag
   try {
-    const userData = await User.create(req.body);
+    const catagoriesData = await Product.create(req.body);
     // 200 status code means the request is successful
-    res.status(200).json(userData);
+    res.status(200).json(catagoriesData);
   } catch (err) {
     // 400 status code means the server could not understand the request
     res.status(400).json(err);
@@ -43,12 +54,12 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try {
-    const userData = await User.findByPk(req.params.id);
-    if (!userData) {
-      res.status(404).json({ message: 'No user with this id!' });
+    const catagoriesData= await Product.findByPk(req.params.id);
+    if (!catagoriesData) {
+      res.status(404).json({ message: 'No Product with this id!' });
       return;
     }
-    res.status(200).json(userData);
+    res.status(200).json(catagoriesData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -57,16 +68,16 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
   try {
-    const userData = await User.destroy({
+    const catagoriesData = await Product.destroy({
       where: {
         id: req.params.id,
       },
     });
-    if (!userData) {
-      res.status(404).json({ message: 'No user with this id!' });
+    if (!catagoriesData) {
+      res.status(404).json({ message: 'No Product with this id!' });
       return;
     }
-    res.status(200).json(userData);
+    res.status(200).json(catagoriesData);
   } catch (err) {
     res.status(500).json(err);
   }

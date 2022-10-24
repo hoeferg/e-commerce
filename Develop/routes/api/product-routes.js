@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
   try {
     const catagoriesData = await Product.findByPk(req.params.id);
     if (!catagoriesData) {
-      res.status(404).json({ message: 'No user with this id!' });
+      res.status(404).json({ message: 'No product with this id!' });
       return;
     }
     res.status(200).json(catagoriesData);
