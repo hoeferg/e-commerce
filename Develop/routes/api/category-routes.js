@@ -10,26 +10,29 @@ router.get('/', async (req, res) => {
     include: {
       model: Product,
       attributes: ['product_name'],
-    }
+    },
+    return: res.status(200).json(catagoriesData),
   }).catch((err) => {
-    res.json(err);
-  });
-  res.json(catagoriesData);
-});
+    if (!catagoriesData) {
+      res.status(404).json({ message: 'No product with this id!' });
+      return;
+    }
+  })
+})
 
 router.get('/', async (req, res) => {
-// find one category by its `id` value
-// be sure to include its associated Products
-try {
-  const catagoriesData = await Product.findByPk(req.params.id);
-  if (!catagoriesData) {
-    res.status(404).json({ message: 'No product with this id!' });
-    return;
+  // find one category by its `id` value
+  // be sure to include its associated Products
+  try {
+    const catagoriesData = await Product.findByPk(req.params.id);
+    if (!catagoriesData) {
+      res.status(404).json({ message: 'No product with this id!' });
+      return;
+    }
+    res.status(200).json(catagoriesData);
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.status(200).json(catagoriesData);
-} catch (err) {
-  res.status(500).json(err);
-}
 });
 
 
