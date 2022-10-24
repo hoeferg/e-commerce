@@ -17,11 +17,14 @@ router.get('/', async (req, res) => {
       model: Tag,
       attributes: ['tag_name'],
     }
-  ]
-  }).catch((err) => {
-    res.json(err);
-  });
-  res.json(catagoriesData);
+  ],
+  return: res.status(200).json(catagoriesData),
+}).catch((err) => {
+  if (!catagoriesData) {
+    res.status(404).json({ message: 'No product with this id!' });
+    return;
+  }
+})
 
 });
 
