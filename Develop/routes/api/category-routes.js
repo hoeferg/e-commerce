@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
-    const catagoriesData = await Product.update(req.body, {
+    const catagoriesData = await Category.update(req.body, {
       where: {
         id: req.params.id,
       },
@@ -74,7 +74,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try {
-    const catagoriesData = await Product.destroy({
+    const catagoriesData = await Category.destroy({
       where: {
         id: req.params.id,
       },

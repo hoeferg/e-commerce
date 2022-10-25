@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try {
-    const tagData = await Tag.findByPk(req.params.id);
+    const tagData = await Tag.update(req.params.id);
     if (!tagData) {
       res.status(404).json({ message: 'No Product with this id!' });
       return;
