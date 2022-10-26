@@ -19,7 +19,7 @@ localhost:3001/api/tags/1
 localhost:3001/api/catagories/1
 
 
-![video](assets/images/screenshot.png)
+![video](https://drive.google.com/file/d/1-w7puBa8lBUYGkzP5404VejyYoce-Igh/view?usp=sharing)
 
 ## Credits
 
