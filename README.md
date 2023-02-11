@@ -1,5 +1,13 @@
 # E-Commerce Back End
 
+
+## Table of Contents  
+* [Description](##Description)  
+* [Installation](##Installation)  
+* [Usage](##Usage)  
+* [License](##License)  
+* [Contact](##Contact)  
+
 ## Description
 
 This product was created to help manage a product within a company. This program was developed to create a program where a user can retrieve information about the current stock of a product. This information includes price, id, and stock count. The user can also add product and take away product from the stock. The overall goal with this product was to create a program that can be adapted to a variety of different companies to best suit their needs.
@@ -18,14 +26,26 @@ localhost:3001/api/products/1
 localhost:3001/api/tags/1
 localhost:3001/api/catagories/1
 
+## Installation
 
-![video](https://drive.google.com/file/d/1-w7puBa8lBUYGkzP5404VejyYoce-Igh/view?usp=sharing)
+1. Clone the repo
+   ```sh
+   git clone https://github.com/hoeferg/e-commerce
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Start the application
+   ```sh
+   npm start
 
-## Credits
-
-N/A
 
 ## License
 
-N/A
+No license
 
+---
+
+## Contact
+Gayle Hoefer - [LinkedIn](https://www.linkedin.com/in/gayle-hoefer-61a2a3124/) - [Github](https://github.com/hoeferg)
