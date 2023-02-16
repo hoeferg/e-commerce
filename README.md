@@ -1,5 +1,6 @@
 # E-Commerce Back End
 
+<img src = "backend.png" />
 
 ## Table of Contents  
 * [Description](##Description)  
